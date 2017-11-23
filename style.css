@@ -1,0 +1,174 @@
+body {
+  margin: 0px 10%;
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  width: 900px;
+  margin: 0 auto;
+}
+
+header h1 {
+  text-align: center;
+  line-height: 2.3;
+}
+
+#random {
+  float: right;
+  display: inline-block;
+  z-index: 0 !important;
+}
+
+#student-form {
+  display: none;
+}
+
+#main {
+  width: 900px;
+  height: 650px;
+  margin: 0 auto;
+}
+
+.student {
+  float: left;
+  width: 225px;
+  height: 150px;
+  position: relative;
+  box-sizing: border-box;
+  background-color: #4d3f3f;
+  overflow: hidden;
+}
+
+.student > div:first-of-type{
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.student img {
+  min-width: 225px;
+  min-height: 150px;
+  max-width: 225px;
+}
+
+.info {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 18px;
+  box-sizing: border-box;
+  display: none;
+}
+
+.info i {
+  margin-right: 5px;
+}
+
+.info i:hover {
+  cursor: pointer;
+}
+
+#student-name {
+  text-align: center;
+  margin-top: 70px;
+}
+
+.info span{
+  display: block;
+  width: 95%;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.bug {
+  display: none;
+  text-align: center;
+  font-size: 70px;
+  position: absolute;
+  color: #fff;
+
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  line-height: 150px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0.3;
+}
+
+.bug i {
+  opacity: 0.2;
+}
+
+.student:hover .info {
+  display: block;
+}
+
+#layout {
+  display: none;
+  position : absolute;
+  width : 100%;
+  height : 100%;
+  left : 0px;
+  top : 0px;
+}
+
+#image-to-get-size {
+  display: none;
+}
+
+#result {
+  position: absolute;
+  text-align: center;
+  width: 225px;
+  height: 150px;
+  display: none;
+  overflow: hidden;
+}
+
+#layout h1 {
+  color: #fff;
+  position: relative;
+  text-align: center;
+}
+
+#result img {
+  min-width: 225px;
+  min-height: 150px;
+  max-width: 100%;
+}
+
+
+/*animation keyframes*/
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes change-background {
+  from {
+    background: rgba(0, 0, 0, 0.0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
