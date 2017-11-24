@@ -1,6 +1,18 @@
 $(document).ready(function() {
 
-  var url = 'https://script.google.com/macros/s/AKfycbwGR4Kpw-1lpyU2lBRfO7RftXNRKyeS_UNCLBZLesA3JhYMjG6D/exec';
+  var siteName = 'https://hta218.github.io/tk-random';
+  // var siteName = 'file:///F:/TechKids/TechkidsRandom/index.html';
+
+  var url = window.location.href;
+  console.log(url);
+
+  var query = url.replace(siteName, '');
+
+  var api = 'https://script.google.com/macros/s/AKfycbwGR4Kpw-1lpyU2lBRfO7RftXNRKyeS_UNCLBZLesA3JhYMjG6D/exec';
+  api += query;
+
+  console.log(api);
+
   var $main = $('#main');
   var students = [];
   var bannedList = [];
@@ -8,7 +20,7 @@ $(document).ready(function() {
   var foundStudentId = '';
 
   // render students
-  $.get(url, function(data, status) {
+  $.get(api, function(data, status) {
     students = data;
 
     for (var i = 0; i < students.length; i++) {
