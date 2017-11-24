@@ -26,8 +26,9 @@ var getSizeToScale = (realImageWidth, realImageHeight) => {
     }
   }
 
-  var studentNameDistanceToTop = ($(window).height() - maxHeightToScale) / 2 + 10;
+  var studentNameDistanceToTop = ($(window).height() - maxHeightToScale) / 2;
   studentNameDistanceToTop += maxHeightToScale;
+  studentNameDistanceToTop -= 100;
   studentNameDistanceToTop += 'px';
 
   maxWidthToScale += 'px';
@@ -139,10 +140,11 @@ var showFoundStudent = (foundStudentId) => {
 
   $('#layout h1').text(name).css({
     'opacity' : '0',
-    'top' : studentNameDistanceToTop
+    'top' : studentNameDistanceToTop,
+    'width' : maxWidthToScale
   });
   $('#layout h1').css({
-    'animation' : 'appear 0.2s 1 0.4s ease-in forwards'
+    'animation' : 'appear 0.2s 1 0.7s ease-in forwards'
   });
 }
 
