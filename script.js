@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var siteName = 'https://hta218.github.io/tk-random';
+  var siteName = 'https://hta218.github.io/tk-random/';
   // var siteName = 'file:///F:/TechKids/TechkidsRandom/index.html';
 
   var url = window.location.href;
