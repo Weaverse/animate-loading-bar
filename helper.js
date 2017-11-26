@@ -28,7 +28,7 @@ var getSizeToScale = (realImageWidth, realImageHeight) => {
 
   var studentNameDistanceToTop = ($(window).height() - maxHeightToScale) / 2;
   studentNameDistanceToTop += maxHeightToScale;
-  studentNameDistanceToTop -= 100;
+  studentNameDistanceToTop -= 80;
   studentNameDistanceToTop += 'px';
 
   maxWidthToScale += 'px';
@@ -37,7 +37,7 @@ var getSizeToScale = (realImageWidth, realImageHeight) => {
   return [maxWidthToScale, maxHeightToScale, studentNameDistanceToTop]
 };
 
-var createKeyframes = (left, top, maxWidthToScale, maxHeightToScale) => {
+var createKeyframe = (left, top, maxWidthToScale, maxHeightToScale) => {
   // create keyframe animation
   var KeyFrame = {
      init: function(){
@@ -111,7 +111,7 @@ var showFoundStudent = (foundStudentId) => {
 
   var $result = $("#result");
   $foundStudent.css({
-    'animation' : 'disappear 0.1s 1 ease-in forwards'
+    'opacity' : '0'
   });
   $('#result img').attr('src', imgSrc);
 
@@ -125,7 +125,7 @@ var showFoundStudent = (foundStudentId) => {
     'display' : 'inline-block'
   });
 
-  var KeyFrame = createKeyframes(left, top, maxWidthToScale, maxHeightToScale);
+  var KeyFrame = createKeyframe(left, top, maxWidthToScale, maxHeightToScale);
 
   KeyFrame.init();
   $result.css({

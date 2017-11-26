@@ -148,15 +148,6 @@ header h1 {
 
 /*animation keyframes*/
 
-@keyframes disappear {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 @keyframes appear {
   from {
     opacity: 0;
