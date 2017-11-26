@@ -5,7 +5,8 @@ $(document).ready(function() {
   var query = url.replace(siteName, '');
 
   var api = 'https://script.google.com/macros/s/AKfycbwGR4Kpw-1lpyU2lBRfO7RftXNRKyeS_UNCLBZLesA3JhYMjG6D/exec';
-  var testapi = api + '?className=c4e13';
+
+  // var testapi = api + '?className=c4e13';
 
   api += query;
 
@@ -16,7 +17,7 @@ $(document).ready(function() {
   var foundStudentId = '';
 
   // render students
-  $.get(testapi, function(data, status) {
+  $.get(api, function(data, status) {
     students = data;
 
     for (var i = 0; i < students.length; i++) {
