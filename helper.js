@@ -65,8 +65,8 @@ var createKeyframes = (left, top, maxWidthToScale, maxHeightToScale) => {
               }
               @keyframes scale {
                 from {
-                  width : 225px;
-                  height: 150px;
+                  width : 180px;
+                  height: 120px;
                 }
                 to {
                   width : ${maxWidthToScale};

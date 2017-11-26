@@ -46,9 +46,9 @@ header h1 {
 }
 
 .student img {
-  min-width: 225px;
-  min-height: 150px;
-  max-width: 225px;
+  min-width: 180px;
+  min-height: 120px;
+  max-width: 180px;
 }
 
 .info {
@@ -125,8 +125,8 @@ header h1 {
 #result {
   position: absolute;
   text-align: center;
-  width: 225px;
-  height: 150px;
+  width: 180px;
+  height: 120px;
   display: none;
   overflow: hidden;
 }
@@ -140,8 +140,8 @@ header h1 {
 }
 
 #result img {
-  min-width: 225px;
-  min-height: 150px;
+  min-width: 180px;
+  min-height: 120px;
   max-width: 100%;
 }
 

@@ -1,17 +1,13 @@
 $(document).ready(function() {
 
   var siteName = 'https://hta218.github.io/tk-random/';
-  // var siteName = 'file:///F:/TechKids/TechkidsRandom/index.html';
-
   var url = window.location.href;
-  console.log(url);
-
   var query = url.replace(siteName, '');
 
   var api = 'https://script.google.com/macros/s/AKfycbwGR4Kpw-1lpyU2lBRfO7RftXNRKyeS_UNCLBZLesA3JhYMjG6D/exec';
-  api += query;
+  var testapi = api + '?className=c4e13';
 
-  console.log(api);
+  api += query;
 
   var $main = $('#main');
   var students = [];
@@ -20,7 +16,7 @@ $(document).ready(function() {
   var foundStudentId = '';
 
   // render students
-  $.get(api, function(data, status) {
+  $.get(testapi, function(data, status) {
     students = data;
 
     for (var i = 0; i < students.length; i++) {
