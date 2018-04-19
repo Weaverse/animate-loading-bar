@@ -24,7 +24,7 @@ const DataController = (() => {
       // });
 
       // For customization
-      studentList = [4,8,3,1,6,5,14,12,11,      10, 0, 2, 7, 16, 9, 13, 15];
+      studentList = [4,8,3,1,6,5,14,12,11,      10, 0, 2, 7, 16, 9, 15, 13];
     },
 
     getData: function() {
