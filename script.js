@@ -1,131 +1,134 @@
-$(document).ready(function() {
-
+/////////////////////////////////////////////////////   APP CONTROLLER
+var app = ((DataCtrl, UICtrl) => {
   var siteName = 'https://hta218.github.io/tk-random/';
   var url = window.location.href;
   var query = url.replace(siteName, '');
 
   var api = 'https://script.google.com/macros/s/AKfycbwGR4Kpw-1lpyU2lBRfO7RftXNRKyeS_UNCLBZLesA3JhYMjG6D/exec';
 
-  // var testapi = api + '?className=c4e13';
+  // api += query;                // PRODUCTION
+  api += '?className=c4e16';     //  TESTING
 
-  api += query;
-
-  var $main = $('#main');
-  var students = [];
-  var bannedList = [];
-  var finding = false;
-  var foundStudentId = '';
-
-  // render students
-  $.get(api, function(data, status) {
-    students = data;
-
-    for (var i = 0; i < students.length; i++) {
-      var bugId = 'bug' + i;
-      var studentId = 'student' + i;
-
-      // set bug id and student id
-      $('#student-form .bug').attr('id', bugId);
-      $('#student-form .student').attr('id', studentId);
-
-      // set image src and student name
-      $('#student-form img').attr('src', students[i].image);
-      $('#student-form #student-name').text(students[i].name);
-
-      var $student = $('#student-form').html();
-      $main.append($student);
+  var getRandomStudent = (studentList, passedList) => {
+    let numb = -1;
+    var finding = true;
+    while (finding) {
+      numb = studentList[Math.floor(Math.random() * studentList.length)];
+      if (passedList.indexOf(numb) === -1) {
+        finding = false;
+      }
     }
+    
+    return numb;
+  }
 
+  var setUpEventListener = function() {
+    var studentId, idNumber;
+    
     // show student info
     $('.show-student').on('click', function() {
-      var studentId = $(this).parents('.student').attr('id');
-      var idNumber = Number(studentId.replace('student', ''));
-
-      showFoundStudent(idNumber);
-
+      studentId = $(this).parents('.student').attr('id').replace("student", "");
+      
+      UICtrl.showStudent(studentId);
     });
 
-    // remove student from list
+    // remove/unremove student from list
     $('.remove').on('click', function() {
-      var studentId = $(this).parents('.student').attr('id');
-      var idNumber = Number(studentId.replace('student', ''));
+      studentId = $(this).parents('.student').attr('id');
+      idNumber = Number(studentId.replace('student', ''));
 
-      if (bannedList.includes(idNumber)) {
-        bannedList.splice(bannedList.indexOf(idNumber), 1);
-        $('#' + studentId + ' img').animate({
-          'opacity' : '1'
-        }, 200);
+      if (DataCtrl.getData().bannedList.includes(idNumber)) {
+        DataCtrl.removeFromBannedList(idNumber);
+        UICtrl.enableStudent(idNumber);
       } else {
-        bannedList.push(idNumber);
-        $('#' + studentId + ' img').animate({
-          'opacity' : '0.3'
-        }, 200);
+        DataCtrl.removeFromStudentList(idNumber);
+        DataCtrl.addToBannedList(idNumber);
+        UICtrl.disableStudent(idNumber);
       }
     });
-    // NOTE: The block code 'remove student from list' MUST be put in block 'render student'
-    // because the js event click render before the HTML element .remove render
-  });
 
-  // handle random event
-  $("#random").click(function() {
-    var numbers = []
-    for (var i = 0; i < students.length; i++) {
-      if (!bannedList.includes(i)) {
-        numbers.push(i);
-      }
-    }
+    // return to find other student
+    $('#layout').click(function() {
+      UICtrl.hideStudent();
+    });
+  }
 
-    var findStudent = function() {
-      if (!numbers.length) {
+  //////////////////////////////////////////////////////        HANDLE EVENT
+  var handleRandomProcess = function() {
+    $("#random").click(function() {
+      var studentList, bannedList, passedList, foundStudent, moveCount, studentNo, bugName;
+      studentList  = DataCtrl.getData().studentList;
 
-        showFoundStudent(foundStudentId);
+      if (studentList.length) {
+        bannedList  = DataCtrl.getData().bannedList;
+        
+        // TODO get studentList & bannedList;
+        foundStudent = studentList.pop();
+        passedList = [];
 
-      } else {
-        $('.bug').hide().css({
-          'opacity' : '0.3'
-        });
-        $('.bug i').css({
-          'opacity' : '0.2'
-        });
-        var num = numbers[Math.floor(Math.random() * numbers.length)]
-        var index = numbers.indexOf(num);
+        moveCount = 0;
+        var moveBug = function() {
+          if (moveCount !== studentList.length) {
+            UICtrl.hideBug();
+            
+            studentNo = getRandomStudent(studentList, passedList);
+            bugName = '#bug' + studentNo;
 
-        var bugName = '#bug' + num;
-        var student = '#student' + num;
+            UICtrl.showBug(bugName);
 
-        if (numbers.length === 1) {
-          foundStudentId = numbers[0]; // get the last item
+            passedList.push(studentNo);
+            setTimeout(moveBug, 200);
+          } else {
+            bugName = '#bug' + foundStudent;
+
+            UICtrl.hideBug();
+            UICtrl.showBug(bugName);
+            
+            UICtrl.showStudent(foundStudent);
+            // DataCtrl.removeFromStudentList(foundStudent);
+            DataCtrl.addToBannedList(foundStudent);
+            UICtrl.disableStudent(foundStudent);
+          }
+          moveCount++;
         }
-        $(bugName).show().animate({
-          'opacity' : '1'
-        }, 200);
-        $(bugName + ' i').animate({
-          'opacity' : '1'
-        }, 300);
-
-        // remove num from numbers
-        numbers.splice(index, 1);
-
-        setTimeout(findStudent, 200);
+        moveBug();
       }
+    });
+  }
+
+  var init = function() {
+    $.get(api, function(data, status) {
+      students = data;
+      UICtrl.renderAllStudent(students);
+
+      DataCtrl.setData(students);
+      setUpEventListener();
+      // NOTE: The block code 'remove student from list' MUST be put in block 'render student'
+      // because the js event click render before the HTML element .remove render
+    });
+  }
+
+  return {
+    run: () => {
+      console.log('App has started');
+      init();
+      handleRandomProcess();
     }
+  }
 
-    if (!finding && numbers.length) {
-      finding = true;
-      findStudent();
-    }
+})(DataController, UIController);
 
-  });
 
-  // return to find other student
-  $('#layout').click(function() {
-    finding = false;
-    hideFoundStudent();
 
-    // remove found-student from bannedList
-    $('#student' + foundStudentId + ' img').animate({
-      'opacity' : '0.3'
-    }, 200);
-    bannedList.push(Number(foundStudentId));
-  });
+
+
+
+
+
+
+
+
+//////////////////////////////////// RUN APP
+$(document).ready(function() {
+  app.run();
 });
