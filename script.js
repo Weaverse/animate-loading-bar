@@ -6,12 +6,15 @@ var app = ((DataCtrl, UICtrl) => {
 
   var api = 'https://script.google.com/macros/s/AKfycbwGR4Kpw-1lpyU2lBRfO7RftXNRKyeS_UNCLBZLesA3JhYMjG6D/exec';
 
-  // api += query;                // PRODUCTION
-  api += '?className=c4e16';     //  TESTING
+  api += query;                // PRODUCTION
+  // api += '?className=c4e16';     //  TESTING
 
-  var getRandomStudent = (studentList, passedList) => {
+  var getRandomStudent = (studentList, passedList, foundStudent) => {
     let numb = -1;
     var finding = true;
+
+    if (studentList.length === passedList.length) return foundStudent;
+
     while (finding) {
       numb = studentList[Math.floor(Math.random() * studentList.length)];
       if (passedList.indexOf(numb) === -1) {
@@ -39,6 +42,7 @@ var app = ((DataCtrl, UICtrl) => {
 
       if (DataCtrl.getData().bannedList.includes(idNumber)) {
         DataCtrl.removeFromBannedList(idNumber);
+        DataCtrl.addToStudentList(idNumber);
         UICtrl.enableStudent(idNumber);
       } else {
         DataCtrl.removeFromStudentList(idNumber);
@@ -56,22 +60,25 @@ var app = ((DataCtrl, UICtrl) => {
   //////////////////////////////////////////////////////        HANDLE EVENT
   var handleRandomProcess = function() {
     $("#random").click(function() {
-      var studentList, bannedList, passedList, foundStudent, moveCount, studentNo, bugName;
+      var studentList, passedList, foundStudent, moveCount, studentNo, bugName;
       studentList  = DataCtrl.getData().studentList;
 
       if (studentList.length) {
-        bannedList  = DataCtrl.getData().bannedList;
         
         // TODO get studentList & bannedList;
-        foundStudent = studentList.pop();
-        passedList = [];
+        foundStudent = studentList[Math.floor(Math.random() * studentList.length)];
+
+        // for customization
+        // foundStudent = studentList[studentList.length - 1];
+
+        passedList = [foundStudent];
 
         moveCount = 0;
         var moveBug = function() {
           if (moveCount !== studentList.length) {
             UICtrl.hideBug();
             
-            studentNo = getRandomStudent(studentList, passedList);
+            studentNo = getRandomStudent(studentList, passedList, foundStudent);
             bugName = '#bug' + studentNo;
 
             UICtrl.showBug(bugName);
@@ -79,15 +86,11 @@ var app = ((DataCtrl, UICtrl) => {
             passedList.push(studentNo);
             setTimeout(moveBug, 200);
           } else {
-            bugName = '#bug' + foundStudent;
-
-            UICtrl.hideBug();
-            UICtrl.showBug(bugName);
-            
             UICtrl.showStudent(foundStudent);
-            // DataCtrl.removeFromStudentList(foundStudent);
-            DataCtrl.addToBannedList(foundStudent);
             UICtrl.disableStudent(foundStudent);
+            
+            DataCtrl.removeFromStudentList(foundStudent);
+            DataCtrl.addToBannedList(foundStudent);
           }
           moveCount++;
         }
@@ -97,6 +100,7 @@ var app = ((DataCtrl, UICtrl) => {
   }
 
   var init = function() {
+    // create request to a google spreadsheet script to get data
     $.get(api, function(data, status) {
       students = data;
       UICtrl.renderAllStudent(students);
@@ -117,14 +121,6 @@ var app = ((DataCtrl, UICtrl) => {
   }
 
 })(DataController, UIController);
-
-
-
-
-
-
-
-
 
 
 
