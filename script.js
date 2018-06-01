@@ -66,10 +66,10 @@ var app = ((DataCtrl, UICtrl) => {
       if (studentList.length) {
         
         // TODO get studentList & bannedList;
-        // foundStudent = studentList[Math.floor(Math.random() * studentList.length)];
+        foundStudent = studentList[Math.floor(Math.random() * studentList.length)];
 
         // for customization
-        foundStudent = studentList[0];
+        // foundStudent = studentList[0];
 
         passedList = [foundStudent];
 
