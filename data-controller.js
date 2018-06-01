@@ -13,12 +13,12 @@ const DataController = (() => {
     addToStudentList: (idNumber) => studentList.push(idNumber),
 
     setData: function(students) {
-      students.forEach((s, index) => {
-        studentList.push(index);
-      });
+      // students.forEach((s, index) => {
+      //   studentList.push(index);
+      // });
 
-      // For customization
-      // studentList = [4,8,3,1,6,5,14,12,11,      10, 0, 2, 7, 16, 9, 15, 13];
+      // For customization (Then update randomProcess in script.js - line 72)
+      studentList = [14, 1, 16, 7, 19, 4, 13, 9, 17, 18, 6, 2, 3,         8, 10, 11, 15, 0, 12, 5];
     },
 
     getData: function() {
