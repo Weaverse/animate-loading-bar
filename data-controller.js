@@ -18,7 +18,7 @@ const DataController = (() => {
       });
 
       // For customization (Then update randomProcess in script.js - line 72)
-      studentList = [5, 12, 0, 6, 4, 7, 9,          1, 2, 3, 8, 10, 11, 13];
+      // studentList = [5, 12, 0, 6, 4, 7, 9,          1, 2, 3, 8, 10, 11, 13];
     },
 
     getData: function() {
