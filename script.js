@@ -6,8 +6,8 @@ var app = ((DataCtrl, UICtrl) => {
 
   var api = 'https://script.google.com/macros/s/AKfycbwGR4Kpw-1lpyU2lBRfO7RftXNRKyeS_UNCLBZLesA3JhYMjG6D/exec';
 
-  api += query;                // PRODUCTION`
-  // api += '?className=c4e19';     //  TESTING
+  api += query;                // PRODUCTION
+  // api += '?className=c4e20';     //  TESTING
 
   var getRandomStudent = (studentList, passedList, foundStudent) => {
     let numb = -1;
@@ -69,7 +69,7 @@ var app = ((DataCtrl, UICtrl) => {
         foundStudent = studentList[Math.floor(Math.random() * studentList.length)];
 
         // for customization
-        // foundStudent = studentList[0];
+        foundStudent = studentList[0];
 
         passedList = [foundStudent];
 
