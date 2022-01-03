@@ -1,0 +1,61 @@
+$startDuration: var(--al-start-duration);
+$finishDuration: var(--al-finish-duration);
+$loadingBarThickness: var(--al-thickness);
+$loadingColor: var(--al-color);
+$endWidth: var(--al-end-width);
+
+.al-loading-overlay, .al-loading-bar {
+  position: relative;
+}
+
+.al-loading-overlay::after {
+  content: "";
+  position: absolute;
+  z-index: 99999999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity $finishDuration ease-in-out $finishDuration;
+  pointer-events: auto;
+}
+
+.al-loading-overlay.overlay-show::after {
+  opacity: 0.6;
+}
+
+.al-loading-bar::before {
+  content: "";
+  position: fixed;
+  z-index: 999999999;
+  top: 0px;
+  left: 0px;
+  width: 0%;
+  height: $loadingBarThickness;
+  opacity: 1;
+  background: $loadingColor;
+}
+
+.al-loading-bar.start::before {
+  transition: width $finishDuration linear, opacity $finishDuration linear $finishDuration;
+}
+
+.al-loading-bar.loading::before {
+  animation: al-loading $startDuration ease-in-out forwards;
+}
+
+.al-loading-bar.loaded::before {
+  width: $endWidth;
+}
+
+.al-loading-bar.finished::before {
+  width: 100%;
+  opacity: 0;
+}
+
+@keyframes al-loading {
+  0% { width: 0; }
+  100% { width: 80%; }
+}
