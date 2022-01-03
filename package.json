@@ -2,5 +2,27 @@
   "devDependencies": {
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
-  }
+  },
+  "name": "animate-loading",
+  "version": "1.0.0",
+  "description": "Tiny loading bar that works",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hta218/animate-loading-bar.git"
+  },
+  "keywords": [
+    "loading-bar",
+    "vanilla-js"
+  ],
+  "author": "Leo @ https://leohuynh.dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hta218/animate-loading-bar/issues"
+  },
+  "homepage": "https://github.com/hta218/animate-loading-bar#readme"
 }
