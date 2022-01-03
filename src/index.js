@@ -1,3 +1,5 @@
+import './style.scss'
+
 export default class AnimateLoading {
   selectors = {
     loadingBar: 'al-loading-bar',
