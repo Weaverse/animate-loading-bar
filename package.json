@@ -1,7 +1,16 @@
 {
   "devDependencies": {
     "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.1",
+    "babel-loader": "^8.2.3",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "html-webpack-plugin": "^5.5.0",
+    "css-loader": "^6.5.1",
+    "sass-loader": "^12.4.0",
+    "node-sass": "^7.0.1",
+    "style-loader": "^3.3.1",
+    "mini-css-extract-plugin": "^2.4.5"
   },
   "name": "animate-loading",
   "version": "1.0.0",
