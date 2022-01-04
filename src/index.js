@@ -52,10 +52,6 @@ export default class AnimateLoading {
       target.classList.add('finished')
       overlay.classList.remove(this.options.overlayShowClass)
     })
-    // setTimeout(() => {
-    //   target.classList.add('finished')
-    //   overlay.classList.remove(this.options.overlayShowClass)
-    // }, 50)
     setTimeout(cleanUp, finishDuration * 2)
     setTimeout(callback, finishDuration)
   }
