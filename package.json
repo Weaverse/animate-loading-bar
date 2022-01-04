@@ -18,7 +18,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "clean": "rm dist/bundle.js",
-    "dev": "webpack --mode development",
+    "start": "webpack --mode development",
     "build": "webpack --mode production"
   },
   "repository": {
