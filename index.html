@@ -10,5 +10,11 @@
 <body>
   <h1>Hello world</h1>
   <script src="./dist/main.js"></script>
+  <script>
+    const AnimateLoading = window['animate-loading-bar'].default;
+    const loading = new AnimateLoading(document.body)
+    loading.start()
+    setTimeout(() => loading.finish(), 2000)
+ </script>
 </body>
 </html>
