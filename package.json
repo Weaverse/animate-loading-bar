@@ -13,9 +13,9 @@
     "mini-css-extract-plugin": "^2.4.5"
   },
   "name": "animate-loading",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tiny loading bar that works",
-  "main": "webpack.config.js",
+  "main": "dist/main.js",
   "scripts": {
     "clean": "rm dist/bundle.js",
     "start": "webpack --mode development",
