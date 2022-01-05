@@ -4,10 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
+  target: 'web',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'main.js',
+    library: 'animate-loading-bar',
+    libraryTarget: 'umd',
+		globalObject: 'this'
   },
   module: {
     rules: [
