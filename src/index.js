@@ -1,20 +1,19 @@
 import './style.scss'
 
 export default class AnimateLoading {
-  selectors = {
-    loadingBar: 'al-loading-bar',
-    loadingOverlay: 'al-loading-overlay',
-  }
-  defaultOptions = {
-    overlay: null,
-    overlayShowClass: 'overlay-show',
-    thickness: '3px',
-    color: 'gray',
-    startDuration: 1000,
-    finishDuration: 300,
-  }
-
   constructor(target, options = {}) {
+    this.selectors = {
+      loadingBar: 'al-loading-bar',
+      loadingOverlay: 'al-loading-overlay',
+    }
+    this.defaultOptions = {
+      overlay: null,
+      overlayShowClass: 'overlay-show',
+      thickness: '3px',
+      color: 'gray',
+      startDuration: 1000,
+      finishDuration: 300,
+    }
     this.options = Object.assign({}, this.defaultOptions, options)
     this.target = target
     this.overlay = this.options.overlay || this.target
