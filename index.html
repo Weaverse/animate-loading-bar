@@ -101,7 +101,7 @@
   <script>
     const AnimateLoading = window['animate-loading'].default;
     const container1 = document.getElementById('container-1')
-    const loading1 = new AnimateLoading(container1)
+    const loading1 = new AnimateLoading(document.body, { overlay: container1 })
 
     const cardTemplate = document.getElementById('card-template')
     const loadBtn1 = document.getElementById('load-btn-1')
