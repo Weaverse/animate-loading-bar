@@ -23,14 +23,14 @@ export default class AnimateLoading {
 
   setLoadingData() {
     const {
-      overlay,
+      target,
       options: { startDuration, finishDuration, thickness, color }
     } = this
 
-    overlay.style.setProperty('--al-thickness', ` ${thickness}`)
-    overlay.style.setProperty('--al-color', ` ${color}`)
-    overlay.style.setProperty('--al-start-duration', ` ${startDuration}ms`)
-    overlay.style.setProperty('--al-finish-duration', ` ${finishDuration}ms`)
+    target.style.setProperty('--al-thickness', ` ${thickness}`)
+    target.style.setProperty('--al-color', ` ${color}`)
+    target.style.setProperty('--al-start-duration', ` ${startDuration}ms`)
+    target.style.setProperty('--al-finish-duration', ` ${finishDuration}ms`)
   }
 
   start() {
