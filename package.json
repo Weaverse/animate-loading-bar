@@ -13,11 +13,11 @@
   },
   "name": "animate-loading",
   "version": "1.0.1",
-  "description": "A tiny loading bar that works",
+  "description": "A tiny loading bar like Shopify, Github, JSFiddle... that works",
   "main": "dist/main.js",
   "scripts": {
     "clean": "rm dist/bundle.js",
-    "dev": "webpack --mode development --watch --progress --color",
+    "dev": "webpack --mode development --watch --color",
     "build": "webpack --mode production"
   },
   "repository": {
