@@ -1,62 +1,56 @@
 import './style.scss'
 
+const _defaultOptions = {
+	overlay: null,
+	thickness: '3px',
+	color: 'gray',
+	startDuration: 1000,
+	finishDuration: 300,
+}
 export default class AnimateLoading {
-  constructor(target, options = {}) {
-    this.selectors = {
-      loadingBar: 'al-loading-bar',
-      loadingOverlay: 'al-loading-overlay',
-    }
-    this.defaultOptions = {
-      overlay: null,
-      overlayShowClass: 'overlay-show',
-      thickness: '3px',
-      color: 'gray',
-      startDuration: 1000,
-      finishDuration: 300,
-    }
-    this.options = Object.assign({}, this.defaultOptions, options)
-    this.target = target
-    this.overlay = this.options.overlay || this.target
-    this.cleanUp = this.cleanUp.bind(this)
-    this.setLoadingData()
-  }
+	constructor(target = document.body, options = {}) {
+		this.options = Object.assign({}, _defaultOptions, options)
+		this.target = target
+		this.overlay = this.options.overlay
+		this.setLoadingData()
+	}
 
-  setLoadingData() {
-    const {
-      target,
-      options: { startDuration, finishDuration, thickness, color }
-    } = this
+	setLoadingData = () => {
+		const {
+			target,
+			options: { startDuration, finishDuration, thickness, color }
+		} = this
 
-    target.style.setProperty('--al-thickness', ` ${thickness}`)
-    target.style.setProperty('--al-color', ` ${color}`)
-    target.style.setProperty('--al-start-duration', ` ${startDuration}ms`)
-    target.style.setProperty('--al-finish-duration', ` ${finishDuration}ms`)
-  }
+		target.style.setProperty('--al-thickness', ` ${thickness}`)
+		target.style.setProperty('--al-color', ` ${color}`)
+		target.style.setProperty('--al-start-duration', ` ${startDuration}ms`)
+		target.style.setProperty('--al-finish-duration', ` ${finishDuration}ms`)
+	}
 
-  start() {
-    this.target.classList.add(this.selectors.loadingBar, 'start', 'loading')
-    this.overlay.classList.add(this.selectors.loadingOverlay, this.options.overlayShowClass)
-  }
+	start = () => {
+		this.target.classList.add('al-loading-bar', 'start', 'loading')
+		if (this.overlay) this.overlay.classList.add('al-loading-overlay', 'overlay-show')
+	}
 
-  finish(callback = () => { }) {
-    const { target, overlay, cleanUp, options: { finishDuration } } = this
+	finish = (callback = () => { }) => {
+		const { target, overlay, cleanUp, options: { finishDuration } } = this
 
-    const endWidth = window.getComputedStyle(target, ':before').width
-    target.style.setProperty('--al-end-width', endWidth)
+		const endWidth = window.getComputedStyle(target, ':before').width
+		target.style.setProperty('--al-end-width', endWidth)
 
-    target.classList.add('loaded')
-    target.classList.remove('loading')
+		target.classList.add('loaded')
+		target.classList.remove('loading')
 
-    window.requestAnimationFrame(() => {
-      target.classList.add('finished')
-      overlay.classList.remove(this.options.overlayShowClass)
-    })
-    setTimeout(cleanUp, finishDuration * 2)
-    setTimeout(callback, finishDuration)
-  }
+		window.requestAnimationFrame(() => {
+			target.classList.add('finished')
+			if (this.overlay) overlay.classList.remove('overlay-show')
+		})
+		setTimeout(cleanUp, finishDuration * 2)
+		setTimeout(callback, finishDuration)
+	}
 
-  cleanUp() {
-    this.target.classList.remove(this.selectors.loadingBar, 'start', 'loaded', 'finished')
-    this.overlay.classList.remove(this.selectors.loadingOverlay)
-  }
+	cleanUp = () => {
+		this.target.classList.remove('al-loading-bar', 'start', 'loaded', 'finished')
+		if (this.overlay) this.overlay.classList.remove('al-loading-overlay')
+	}
 }
