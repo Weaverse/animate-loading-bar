@@ -16,6 +16,14 @@
         <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">
           A tiny loading bar like Shopify, Github, JSFiddle... that works!
         </p>
+				<div class="mt-8 flex items-center">
+					<span class="mr-4">Loading type:</span>
+					<select name="loading-type" id="loading-type" class="border border-gray-300 p-2 rounded pr-4">
+						<option value="basic" selected>Basic</option>
+						<option value="no-overlay">Without overlay</option>
+						<option value="drawer">Inside a drawer</option>
+					</select>
+				</div>
       </div>
       <div id="container-1">
         <div class="flex flex-wrap -m-4">
@@ -101,7 +109,9 @@
   <script>
     const AnimateLoading = window['animate-loading'].default;
     const container1 = document.getElementById('container-1')
-    const loading1 = new AnimateLoading(document.body, { overlay: container1 })
+    const loading1 = new AnimateLoading(document.body, {
+			overlay: container1
+		})
 
     const cardTemplate = document.getElementById('card-template')
     const loadBtn1 = document.getElementById('load-btn-1')
