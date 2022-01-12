@@ -12,7 +12,7 @@
 
 <body class="relative">
 	<section class="text-gray-600 body-font min-h-screen">
-		<div class="container px-5 py-24 mx-auto">
+		<div class="container px-5 py-16 mx-auto">
 			<div class="flex flex-wrap w-full mb-20 flex-col items-center text-center">
 				<h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Animate Loading Bar</h1>
 				<p class="lg:w-1/2 w-full leading-relaxed text-gray-500">
@@ -23,55 +23,19 @@
 					<select name="loading-type" id="loading-type" class="border border-gray-300 p-2 rounded pr-4">
 						<option value="basic">Basic</option>
 						<option value="with-overlay">With overlay</option>
-						<option value="drawer">Inside a drawer</option>
+						<option value="drawer">Inside a drawer (TODO)</option>
 					</select>
 				</div>
 			</div>
 			<div id="container">
 				<div class="flex flex-wrap -m-4">
-					<div id="card-template" class="xl:w-1/4 md:w-1/2 p-4">
+					<div id="card-template" class="hidden xl:w-1/4 md:w-1/2 p-4">
 						<div class="bg-gray-100 rounded-lg">
 							<img class="h-48 rounded w-full object-cover object-center" src="https://picsum.photos/id/100/350/200"
 								alt="content">
 							<div class="p-6">
 								<h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
 								<h2 class="img-title text-lg text-gray-900 font-medium title-font mb-4">Chichen Itza</h2>
-								<p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-									hexagon disrupt edison bulbche.</p>
-							</div>
-						</div>
-					</div>
-					<div class="xl:w-1/4 md:w-1/2 p-4">
-						<div class="bg-gray-100 rounded-lg">
-							<img class="h-48 rounded w-full object-cover object-center" src="https://picsum.photos/id/101/350/200"
-								alt="content">
-							<div class="p-6">
-								<h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
-								<h2 class="text-lg text-gray-900 font-medium title-font mb-4">Chichen Itza</h2>
-								<p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-									hexagon disrupt edison bulbche.</p>
-							</div>
-						</div>
-					</div>
-					<div class="xl:w-1/4 md:w-1/2 p-4">
-						<div class="bg-gray-100 rounded-lg">
-							<img class="h-48 rounded w-full object-cover object-center" src="https://picsum.photos/id/102/350/200"
-								alt="content">
-							<div class="p-6">
-								<h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
-								<h2 class="text-lg text-gray-900 font-medium title-font mb-4">Chichen Itza</h2>
-								<p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-									hexagon disrupt edison bulbche.</p>
-							</div>
-						</div>
-					</div>
-					<div class="xl:w-1/4 md:w-1/2 p-4">
-						<div class="bg-gray-100 rounded-lg">
-							<img class="h-48 rounded w-full object-cover object-center" src="https://picsum.photos/id/103/350/200"
-								alt="content">
-							<div class="p-6">
-								<h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
-								<h2 class="text-lg text-gray-900 font-medium title-font mb-4">Chichen Itza</h2>
 								<p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery
 									hexagon disrupt edison bulbche.</p>
 							</div>
@@ -158,11 +122,13 @@
 			const id = Math.floor(Math.random() * 100);
 			fetch(`https://picsum.photos/id/${id}/info`)
 				.then(res => res.json())
-				.then(data => {
+				.then(async data => {
 					const { author, download_url } = data
 					const newCard = cardTemplate.cloneNode(true)
-					newCard.querySelector('img').src = download_url
 					newCard.querySelector('.img-title').textContent = author
+					await loadImage(download_url)
+					newCard.querySelector('img').src = download_url
+					newCard.classList.remove('hidden')
 					container.firstElementChild.appendChild(newCard)
 					loading.finish()
 				})
@@ -171,6 +137,15 @@
 					loading.finish()
 				})
 		})
+
+		const loadImage = src => {
+			return new Promise((resolve, reject) => {
+				const img = document.createElement('img')
+				img.src = src
+				img.onload = resolve
+				img.onerror = reject
+			})
+		}
 	</script>
 </body>
 
