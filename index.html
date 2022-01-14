@@ -67,8 +67,8 @@
 			</div>
 		</div>
 	</footer>
-	<section id="drawer" class="fixed inset-0 bg-black" style="--tw-bg-opacity: 0.5;">
-		<div class="w-96 h-full bg-white ml-auto py-4 px-2 flex flex-col justify-between relative">
+	<section class="fixed inset-0 bg-black" style="--tw-bg-opacity: 0.5;">
+		<div id="drawer" class="w-96 h-full bg-white ml-auto py-4 px-2 flex flex-col justify-between relative" style="contain: content;">
 			<button class="text-2xl absolute right-0 top-0 py-2 px-4 cursor-pointer">x</button>
 			<div class="drawer-container mt-8">
 				<div id="drawer-card-template" class="m-4">
@@ -103,7 +103,7 @@
 			if (type === "with-overlay") {
 				return new AnimateLoading(document.body, { overlay: container })
 			} else if (type === "drawer") {
-				return new AnimateLoading(drawer.firstElementChild, { overlay: drawer.firstElementChild })
+				return new AnimateLoading(drawer, { overlay: drawer })
 			} else {
 				return new AnimateLoading()
 			}
