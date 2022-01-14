@@ -12,7 +12,7 @@
     "mini-css-extract-plugin": "^2.4.5"
   },
   "name": "animate-loading",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tiny loading bar like Shopify, Github, JSFiddle... that works",
   "main": "dist/main.js",
   "scripts": {
