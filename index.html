@@ -8,6 +8,14 @@
 	<link rel="stylesheet" href="./dist/main.css">
 	<title>Animate loading demo</title>
 	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		body.show-drawer-button .load-btn:first-child {
+			display: none;
+		}
+		body.show-drawer-button #open-drawer {
+			display: flex;
+		}
+	</style>
 </head>
 
 <body class="relative">
@@ -42,9 +50,11 @@
 						</div>
 					</div>
 				</div>
-				<button id="load-btn"
-					class="flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Load
+				<button
+					class="load-btn flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Load
 					something</button>
+				<button id="open-drawer"
+					class="hidden mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Open drawer</button>
 			</div>
 		</div>
 	</section>
@@ -67,11 +77,10 @@
 			</div>
 		</div>
 	</footer>
-	<section class="fixed inset-0 bg-black transition-all duration-300" style="--tw-bg-opacity: 0.5;">
+	<section class="hidden fixed inset-0 bg-black transition-all duration-300" style="--tw-bg-opacity: 0;">
 		<div id="drawer"
 			class="transition-transform duration-300 translate-x-0 w-96 h-full bg-white ml-auto py-4 px-2 flex flex-col justify-between relative"
-			style="contain: content;">
-			<button id="close-drawer" class="text-2xl absolute right-0 top-0 py-2 px-4 cursor-pointer">x</button>
+			style="contain: content; transition: translateX(100%);">
 			<div class="drawer-container mt-8">
 				<div id="drawer-card-template" class="m-4">
 					<div class="bg-gray-100 flex">
@@ -83,8 +92,9 @@
 					</div>
 				</div>
 			</div>
-			<button id="drawer-load-btn"
-				class="justify-end flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Load
+			<button id="close-drawer" class="text-2xl absolute right-0 top-0 py-2 px-4 cursor-pointer">x</button>
+			<button
+				class="load-btn justify-end flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Load
 				something</button>
 		</div>
 	</section>
@@ -92,85 +102,96 @@
 	<script>
 		const AnimateLoading = window['animate-loading'].default;
 
-		const container = document.getElementById('container')
-		const cardTemplate = document.getElementById('card-template')
-		const loadBtn = document.getElementById('load-btn')
-		const drawer = document.getElementById('drawer')
-		const drawerContainer = document.querySelector('.drawer-container')
-		const drawerCardTemplate = document.getElementById('drawer-card-template')
-		const drawerLoadBtn = document.getElementById('drawer-load-btn')
-		const drawerClosetn = document.getElementById('close-drawer')
+		const loadingData = [
+			{
+				type: 'basic',
+				nodes: {
+					cardContainer: document.getElementById('container'),
+					cardTemplate: document.getElementById('card-template'),
+				}
+			},
+			{
+				type: 'with-overlay',
+				nodes: {
+					loadingOverlay: document.getElementById('container'),
+					cardContainer: document.getElementById('container'),
+					cardTemplate: document.getElementById('card-template')
+				}
+			},
+			{
+				type: 'drawer',
+				nodes: {
+					loadingTarget: document.getElementById('drawer'),
+					// loadBtn: document.getElementById('drawer-load-btn'),
+					container: document.getElementById('drawer'),
+					cardTemplate: document.getElementById('drawer-card-template')
+				}
+			},
+		]
 
-		const initLoading = (type) => {
-			if (type === "with-overlay") {
-				return new AnimateLoading(document.body, { overlay: container })
-			} else if (type === "drawer") {
-				return new AnimateLoading(drawer, { overlay: drawer })
+		let loading, cardContainer, cardTemplate
+
+		const initLoading = (_type = 'basic') => {
+			if (_type === 'drawer') {
+				document.body.classList.add('show-drawer-button')
 			} else {
-				return new AnimateLoading()
+				document.body.classList.remove('show-drawer-button')
 			}
-		}
 
-		let loading = initLoading('drawer')
+			const {
+				nodes: { loadingTarget, cardContainer: _container, cardTemplate: _template, loadingOverlay: overlay }
+			} = loadingData.find(({ type }) => type === _type)
+
+			cardContainer = _container
+			cardTemplate = _template
+			loading = new AnimateLoading(loadingTarget, { overlay })
+		}
+		initLoading()
+
+		document.body.addEventListener('click', (e) => {
+			if (e.target.id === 'load-btn') {
+				loading.start()
+				const id = Math.floor(Math.random() * 100);
+				fetch(`https://picsum.photos/id/${id}/info`)
+					.then(res => res.json())
+					.then(async data => {
+						const { author, download_url } = data
+						const newCard = cardTemplate.cloneNode(true)
+						newCard.querySelector('.img-title').textContent = author
+						await loadImage(download_url)
+						newCard.querySelector('img').src = download_url
+						newCard.classList.remove('hidden')
+						cardContainer.firstElementChild.appendChild(newCard)
+						loading.finish()
+					})
+					.catch(err => {
+						console.error(err)
+						loading.finish()
+					})
+			}
+		})
+
 		document
 			.getElementById('loading-type')
-			.addEventListener("change", (e) => {
-				if (e.target.value) {
+			.addEventListener("change", e => initLoading(e.target.value))
 
-				}
-				loading = initLoading(e.target.value)
-			})
-
-		loadBtn.addEventListener("click", () => {
-			loading.start()
-			const id = Math.floor(Math.random() * 100);
-			fetch(`https://picsum.photos/id/${id}/info`)
-				.then(res => res.json())
-				.then(async data => {
-					const { author, download_url } = data
-					const newCard = cardTemplate.cloneNode(true)
-					newCard.querySelector('.img-title').textContent = author
-					await loadImage(download_url)
-					newCard.querySelector('img').src = download_url
-					newCard.classList.remove('hidden')
-					container.firstElementChild.appendChild(newCard)
-					loading.finish()
-				})
-				.catch(err => {
-					console.error(err)
-					loading.finish()
-				})
-		})
-
-		drawerLoadBtn.addEventListener("click", () => {
-			loading.start()
-			const id = Math.floor(Math.random() * 100);
-			fetch(`https://picsum.photos/id/${id}/info`)
-				.then(res => res.json())
-				.then(async data => {
-					const { author, download_url } = data
-					const newCard = drawerCardTemplate.cloneNode(true)
-					newCard.querySelector('.img-title').textContent = author
-					await loadImage(download_url)
-					newCard.querySelector('img').src = download_url
-					newCard.classList.remove('hidden')
-					drawerContainer.appendChild(newCard)
-					loading.finish()
-				})
-				.catch(err => {
-					console.error(err)
-					loading.finish()
-				})
-		})
-
+		const drawerOpenBtn = document.getElementById('open-drawer')
+		const drawerCloseBtn = document.getElementById('close-drawer')
+		const drawer = document.getElementById('drawer')
+		const drawerWrapper = drawer.parentElement
 		const closeDrawer = () => {
 			drawer.style.transform = "translateX(100%)"
-			drawerSection.style["--tw-bg-opacity"] = 0
-			setTimeout(() => drawerSection.style.display = 'none', 300)
+			drawerWrapper.style.setProperty("--tw-bg-opacity", "0")
+			setTimeout(() => drawerWrapper.style.display = 'none', 300)
 		}
-		const drawerSection = drawer.parentElement
-		drawerClosetn.addEventListener("click", closeDrawer)
-		drawerSection.addEventListener("click", (e) => (e.target === drawerSection) && closeDrawer())
+
+		drawerOpenBtn.addEventListener('click', () => {
+			drawerWrapper.style.display = 'block'
+			drawer.style.transform = "translateX(0)"
+			drawerWrapper.style.setProperty("--tw-bg-opacity", "0.5")
+		})
+		drawerCloseBtn.addEventListener("click", closeDrawer)
+		drawerWrapper.addEventListener("click", (e) => (e.target === drawerWrapper) && closeDrawer())
 
 		const loadImage = src => {
 			return new Promise((resolve, reject) => {
@@ -182,5 +203,4 @@
 		}
 	</script>
 </body>
-
 </html>
