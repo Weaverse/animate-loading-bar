@@ -67,14 +67,15 @@
 			</div>
 		</div>
 	</footer>
-	<section class="fixed inset-0 bg-black" style="--tw-bg-opacity: 0.5;">
-		<div id="drawer" class="w-96 h-full bg-white ml-auto py-4 px-2 flex flex-col justify-between relative" style="contain: content;">
-			<button class="text-2xl absolute right-0 top-0 py-2 px-4 cursor-pointer">x</button>
+	<section class="fixed inset-0 bg-black transition-all duration-300" style="--tw-bg-opacity: 0.5;">
+		<div id="drawer"
+			class="transition-transform duration-300 translate-x-0 w-96 h-full bg-white ml-auto py-4 px-2 flex flex-col justify-between relative"
+			style="contain: content;">
+			<button id="close-drawer" class="text-2xl absolute right-0 top-0 py-2 px-4 cursor-pointer">x</button>
 			<div class="drawer-container mt-8">
 				<div id="drawer-card-template" class="m-4">
 					<div class="bg-gray-100 flex">
-						<img class="h-24 w-1/3 object-cover object-center" src="https://picsum.photos/id/100/350/200"
-							alt="content">
+						<img class="h-24 w-1/3 object-cover object-center" src="https://picsum.photos/id/100/350/200" alt="content">
 						<div class="p-4 w-2/3">
 							<p class="tracking-widest text-indigo-500 text-xs font-medium title-font">Subtitle</p>
 							<p class="img-title text-gray-900 font-medium title-font mb-4">Chichen Itza</p>
@@ -83,8 +84,8 @@
 				</div>
 			</div>
 			<button id="drawer-load-btn"
-					class="justify-end flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Load
-					something</button>
+				class="justify-end flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Load
+				something</button>
 		</div>
 	</section>
 	<script src="./dist/main.js"></script>
@@ -98,6 +99,7 @@
 		const drawerContainer = document.querySelector('.drawer-container')
 		const drawerCardTemplate = document.getElementById('drawer-card-template')
 		const drawerLoadBtn = document.getElementById('drawer-load-btn')
+		const drawerClosetn = document.getElementById('close-drawer')
 
 		const initLoading = (type) => {
 			if (type === "with-overlay") {
@@ -112,7 +114,12 @@
 		let loading = initLoading('drawer')
 		document
 			.getElementById('loading-type')
-			.addEventListener("change", (e) => loading = initLoading(e.target.value))
+			.addEventListener("change", (e) => {
+				if (e.target.value) {
+
+				}
+				loading = initLoading(e.target.value)
+			})
 
 		loadBtn.addEventListener("click", () => {
 			loading.start()
@@ -155,6 +162,15 @@
 					loading.finish()
 				})
 		})
+
+		const closeDrawer = () => {
+			drawer.style.transform = "translateX(100%)"
+			drawerSection.style["--tw-bg-opacity"] = 0
+			setTimeout(() => drawerSection.style.display = 'none', 300)
+		}
+		const drawerSection = drawer.parentElement
+		drawerClosetn.addEventListener("click", closeDrawer)
+		drawerSection.addEventListener("click", (e) => (e.target === drawerSection) && closeDrawer())
 
 		const loadImage = src => {
 			return new Promise((resolve, reject) => {
