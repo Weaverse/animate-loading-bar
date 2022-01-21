@@ -149,7 +149,7 @@
 		initLoading()
 
 		document.body.addEventListener('click', (e) => {
-			if (e.target.id === 'load-btn') {
+			if (e.target.classList.contains('load-btn')) {
 				loading.start()
 				const id = Math.floor(Math.random() * 100);
 				fetch(`https://picsum.photos/id/${id}/info`)
