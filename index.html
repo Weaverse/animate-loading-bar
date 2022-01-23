@@ -9,7 +9,7 @@
 	<title>Animate loading demo</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<style>
-		body.show-drawer-button .load-btn:first-child {
+		body.show-drawer-button .load-btn.outside {
 			display: none;
 		}
 		body.show-drawer-button #open-drawer {
@@ -53,7 +53,7 @@
 					</div>
 				</div>
 				<button
-					class="load-btn flex mx-auto mt-8 md:mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Load
+					class="load-btn outside flex mx-auto mt-8 md:mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Load
 					something</button>
 				<button id="open-drawer"
 					class="hidden mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Open drawer</button>
@@ -124,8 +124,7 @@
 				type: 'drawer',
 				nodes: {
 					loadingTarget: document.getElementById('drawer'),
-					// loadBtn: document.getElementById('drawer-load-btn'),
-					container: document.getElementById('drawer'),
+					cardContainer: document.getElementById('drawer'),
 					cardTemplate: document.getElementById('drawer-card-template')
 				}
 			},
