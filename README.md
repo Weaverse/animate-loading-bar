@@ -16,25 +16,25 @@
 ![Bundle phobia](https://i.imgur.com/zqTcrcV.png)
 
 ### Installation
-1. Install NPM packages
+1. Via `npm`
 	```sh
 	npm install animate-loading
 	```
-	Or
+	Or `yarn`
 	```sh
 	yarn add animate-loading
 	```
-2. Import in your project
+2. Import to your project
 	```js
 	import 'animate-loading/dist/main.css'
 	import AnimateLoading from 'animate-loading'
 	```
 3. Usage
 	```js
-	# Create an instance in your project
+	// Create an instance in your project
 	const loading = new AnimateLoading()
 
-	# Start loading
+	// Start loading
 	loading.start()
 	fetch('YOUR_API')
 		.then(console.log)
