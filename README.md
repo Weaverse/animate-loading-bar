@@ -4,7 +4,6 @@
   </a>
 
 <h3 align="center">Animate Loading Bar</h3>
-
   <p align="center">
     1kb loading bar like Shopify, Github, JSFiddle... that works!
     <br />
@@ -16,11 +15,11 @@
 ![Bundle phobia](https://i.imgur.com/zqTcrcV.png)
 
 ### Installation
-1. Via `npm`
+1. Via npm
 	```sh
 	npm install animate-loading
 	```
-	Or `yarn`
+	Or yarn
 	```sh
 	yarn add animate-loading
 	```
@@ -36,13 +35,12 @@
 
 	// Start loading
 	loading.start()
-	fetch('YOUR_API')
-		.then(console.log)
-		.catch(console.error)
-		.finally(() => {
-			# Finish loading
-			loading.finish()
-		})
+
+	// Execute your async stuff
+	await fetch('YOUR_API')
+
+	// Finish loading
+	loading.finish()
 	```
 
 
@@ -52,7 +50,7 @@
 const loading = new AnimateLoading(target, options)
 ```
 
-- `target` [HTMLElement]: the loading target - or where the loading bar shows up. Default value is `document.body` (the loading bar will show at the top of your document)
+- `target` [HTMLElement]: where the loading bar shows up. (Default value: `document.body`)
 - `options` [Object]: Loading options
   - `options.overlay` [HTMLElement]: Set a blur overlay to your node (if neccessary)
   - `options.thickness` [String]: the loading bar thickness (Default value: `3px`)
