@@ -14,7 +14,7 @@
 
 ![Bundle phobia](https://i.imgur.com/zqTcrcV.png)
 
-### Installation
+## Installation
 1. Via npm
 	```sh
 	npm install animate-loading
@@ -55,7 +55,7 @@ const loading = new AnimateLoading(target, options)
   - `options.overlay` [HTMLElement]: Set a blur overlay to your node (if neccessary)
   - `options.thickness` [String]: the loading bar thickness (Default value: `3px`)
   - `options.color` [String]: the loading bar background color (Default value: `gray`)
-  - `options.startDuration` [Number]: The duration (in `ms`) from the point starting your async stuff until it gets done (Default value: `1000`)
+  - `options.startDuration` [Number]: The duration (in `ms`) from the start of your async stuff until it gets done (Default value: `1000`)
   - `options.finishDuration` [Number]: The duration (in `ms`) left to finish loading (Default value: `300`)
 
 ## Methods
