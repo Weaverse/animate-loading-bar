@@ -1,4 +1,4 @@
-import './style.scss';
+import './style.css';
 export interface AnimateLoadingOptions {
     /** Set a blur overlay to your node (if necessary) */
     overlay?: HTMLElement | null;

@@ -18,13 +18,5 @@ export default defineConfig({
         exports: 'named'
       }
     }
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        // Enable modern API for Sass
-        api: 'modern-compiler'
-      }
-    }
   }
 })

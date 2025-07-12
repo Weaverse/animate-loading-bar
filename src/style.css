@@ -1,9 +1,3 @@
-$startDuration: var(--al-start-duration);
-$finishDuration: var(--al-finish-duration);
-$loadingBarThickness: var(--al-thickness);
-$loadingColor: var(--al-color);
-$endWidth: var(--al-end-width);
-
 .al-loading-overlay, .al-loading-bar {
   position: relative;
 }
@@ -18,7 +12,7 @@ $endWidth: var(--al-end-width);
   bottom: 0;
   background-color: #fff;
   opacity: 0;
-  transition: opacity $finishDuration ease-in-out $finishDuration;
+  transition: opacity var(--al-finish-duration) ease-in-out var(--al-finish-duration);
   pointer-events: auto;
 }
 
@@ -33,21 +27,21 @@ $endWidth: var(--al-end-width);
   top: 0px;
   left: 0px;
   width: 0%;
-  height: $loadingBarThickness;
+  height: var(--al-thickness);
   opacity: 1;
-  background: $loadingColor;
+  background: var(--al-color);
 }
 
 .al-loading-bar.start::before {
-  transition: width $finishDuration linear, opacity $finishDuration linear $finishDuration;
+  transition: width var(--al-finish-duration) linear, opacity var(--al-finish-duration) linear var(--al-finish-duration);
 }
 
 .al-loading-bar.loading::before {
-  animation: al-loading $startDuration ease-in-out forwards;
+  animation: al-loading var(--al-start-duration) ease-in-out forwards;
 }
 
 .al-loading-bar.loaded::before {
-  width: $endWidth;
+  width: var(--al-end-width);
 }
 
 .al-loading-bar.finished::before {
