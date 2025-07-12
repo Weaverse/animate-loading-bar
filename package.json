@@ -1,7 +1,7 @@
 {
   "name": "animate-loading",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Lightweight TypeScript loading bar library like Shopify, Github, JSFiddle... that works!",
   "main": "dist/main.js",
   "types": "dist/index.d.ts",
