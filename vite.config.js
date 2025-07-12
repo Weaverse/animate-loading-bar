@@ -14,7 +14,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Ensure consistent naming
-        assetFileNames: 'main.css'
+        assetFileNames: 'main.css',
+        exports: 'named'
       }
     }
   },
