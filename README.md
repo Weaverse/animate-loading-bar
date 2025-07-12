@@ -1,14 +1,34 @@
 <div align="center">
 <h3 align="center">Animate Loading Bar</h3>
   <p align="center">
-    1kb loading bar like Shopify, Github, JSFiddle... that works!
+    Lightweight TypeScript loading bar like Shopify, Github, JSFiddle... that works!
     <br />
-    <a href="https://codesandbox.io/p/sandbox/h5945y">View Demo</a>
+    <a href="https://codesandbox.io/p/sandbox/h5945y">
+      <img src="https://img.shields.io/badge/CodeSandbox-Demo-blue?style=flat&logo=codesandbox" alt="CodeSandbox Demo" />
+    </a>
   </p>
 </div>
 
+<div align="center">
+  
+[![Bundle Size](https://bundlejs.com/badge?q=animate-loading@latest)](https://bundlejs.com/?q=animate-loading@latest)
+[![npm version](https://img.shields.io/npm/v/animate-loading.svg?style=flat)](https://www.npmjs.com/package/animate-loading)
+[![npm downloads](https://img.shields.io/npm/dm/animate-loading.svg?style=flat)](https://www.npmjs.com/package/animate-loading)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/npm/l/animate-loading.svg?style=flat)](https://github.com/Weaverse/animate-loading-bar/blob/main/LICENSE)
 
-![Bundle phobia](https://i.imgur.com/zqTcrcV.png)
+</div>
+
+
+## ✨ Features
+
+- 🚀 **Lightweight**: ~3kB gzipped bundle size
+- 📦 **Zero Dependencies**: Pure TypeScript/JavaScript
+- 🎨 **Customizable**: Colors, thickness, timing, overlay options
+- 🔒 **Type Safe**: Full TypeScript support with exported types
+- 🎯 **Modern**: Uses CSS custom properties and modern APIs
+- 🛡️ **Robust**: Built-in state management and error handling
+- 🧹 **Clean**: Memory leak prevention with proper cleanup
 
 ## Installation
 1. Via npm
