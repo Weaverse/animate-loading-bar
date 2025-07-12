@@ -75,18 +75,20 @@ const loading = new AnimateLoading(target, options)
   - `options.overlay` [HTMLElement]: Set a blur overlay to your node (if necessary)
   - `options.thickness` [String]: the loading bar thickness (Default value: `3px`)
   - `options.color` [String]: the loading bar background color (Default value: `gray`)
+  - `options.overlayColor` [String]: the overlay background color (Default value: `#ffffff`)
+  - `options.overlayOpacity` [Number]: the overlay opacity when shown (Default value: `0.6`)
   - `options.startDuration` [Number]: The duration (in `ms`) from the start of your async stuff until it gets done (Default value: `1000`)
   - `options.finishDuration` [Number]: The duration (in `ms`) left to finish loading (Default value: `300`)
 
 ## Methods
 
-1. Start loading
+1. **Start loading**
 	```javascript
 	loading.start()
 	```
 	Run this before starting your async stuff
 
-2. Finish loading
+2. **Finish loading**
 	```javascript
 	loading.finish(callback = () => {})
 	```
@@ -94,6 +96,47 @@ const loading = new AnimateLoading(target, options)
 
 	Optional `callback` can be pass to run after finishing the loading process.
 
+3. **Check loading state**
+	```javascript
+	if (loading.loading) {
+		console.log('Loading in progress...')
+	}
+	```
+
+4. **Destroy instance**
+	```javascript
+	loading.destroy()
+	```
+	Call this when you no longer need the instance. Cleans up all timeouts and DOM classes.
+
+## Advanced Usage
+
+```javascript
+const loading = new AnimateLoading(document.body, {
+	thickness: '4px',
+	color: '#3498db',
+	overlayColor: '#000000',
+	overlayOpacity: 0.8,
+	startDuration: 1500,
+	finishDuration: 500
+})
+
+// Safe usage with state checking
+if (!loading.loading) {
+	loading.start()
+	
+	try {
+		await someAsyncOperation()
+		loading.finish(() => console.log('Success!'))
+	} catch (error) {
+		loading.finish(() => console.error('Failed!'))
+	}
+}
+
+// Clean up when done
+loading.destroy()
+```
+
 ## Credit
 
-Copyright (c) 2022 Leo Huynh @ [https://leohuynh.dev](https://leohuynh.dev)
+Copyright (c) 2022-present by Leo Huynh @ [https://leohuynh.dev](https://leohuynh.dev)

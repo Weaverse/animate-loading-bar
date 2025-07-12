@@ -2,9 +2,14 @@
   "name": "animate-loading",
   "type": "module",
   "version": "2.0.0",
-  "description": "1kb loading bar like Shopify, Github, JSFiddle... that works",
+  "description": "Lightweight TypeScript loading bar library like Shopify, Github, JSFiddle... that works!",
   "main": "dist/main.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -17,7 +22,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
@@ -26,18 +32,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hta218/animate-loading-bar.git"
+    "url": "git+https://github.com/Weaverse/animate-loading-bar.git"
   },
   "keywords": [
     "loading-bar",
+    "progress-bar",
+    "loading-indicator",
     "vanilla-js",
     "typescript",
-    "css"
+    "css",
+    "animation",
+    "ui",
+    "frontend",
+    "web-components"
   ],
   "author": "Leo @ https://leohuynh.dev",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hta218/animate-loading-bar/issues"
+  "engines": {
+    "node": ">=16.0.0"
   },
-  "homepage": "https://github.com/hta218/animate-loading-bar#readme"
+  "sideEffects": [
+    "*.css"
+  ],
+  "bugs": {
+    "url": "https://github.com/Weaverse/animate-loading-bar/issues"
+  },
+  "homepage": "https://github.com/Weaverse/animate-loading-bar#readme"
 }
