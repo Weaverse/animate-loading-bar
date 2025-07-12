@@ -1,7 +1,7 @@
 {
   "name": "animate-loading",
   "type": "module",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "1kb loading bar like Shopify, Github, JSFiddle... that works",
   "main": "dist/main.js",
   "types": "dist/index.d.ts",
