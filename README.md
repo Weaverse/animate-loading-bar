@@ -1,8 +1,4 @@
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/282/comet_2604-fe0f.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">Animate Loading Bar</h3>
   <p align="center">
     1kb loading bar like Shopify, Github, JSFiddle... that works!
