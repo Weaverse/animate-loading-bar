@@ -4,14 +4,26 @@
   "version": "1.0.3",
   "description": "1kb loading bar like Shopify, Github, JSFiddle... that works",
   "main": "dist/main.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/main.js",
+      "require": "./dist/main.js"
+    },
+    "./dist/main.css": "./dist/main.css"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "vite": "^7.0.4",
-    "sass": "^1.69.0"
+    "sass": "^1.69.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.10.2"
   },
   "repository": {
     "type": "git",

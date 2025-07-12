@@ -28,6 +28,12 @@
 	import 'animate-loading/dist/main.css'
 	import AnimateLoading from 'animate-loading'
 	```
+
+	**TypeScript:**
+	```ts
+	import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
+	import 'animate-loading/dist/main.css'
+	```
 3. Usage
 	```js
 	// Create an instance in your project
@@ -43,6 +49,24 @@
 	loading.finish()
 	```
 
+	**TypeScript with full type safety:**
+	```ts
+	import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
+	
+	const options: AnimateLoadingOptions = {
+		thickness: '4px',
+		color: '#3498db',
+		startDuration: 1200,
+		finishDuration: 400
+	}
+	
+	const loading = new AnimateLoading(document.body, options)
+	
+	loading.start()
+	await fetch('YOUR_API')
+	loading.finish(() => console.log('Done!'))
+	```
+
 
 ## Available options
 
@@ -52,7 +76,7 @@ const loading = new AnimateLoading(target, options)
 
 - `target` [HTMLElement]: where the loading bar shows up. (Default value: `document.body`)
 - `options` [Object]: Loading options
-  - `options.overlay` [HTMLElement]: Set a blur overlay to your node (if neccessary)
+  - `options.overlay` [HTMLElement]: Set a blur overlay to your node (if necessary)
   - `options.thickness` [String]: the loading bar thickness (Default value: `3px`)
   - `options.color` [String]: the loading bar background color (Default value: `gray`)
   - `options.startDuration` [Number]: The duration (in `ms`) from the start of your async stuff until it gets done (Default value: `1000`)
