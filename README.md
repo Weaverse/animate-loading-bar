@@ -1,18 +1,34 @@
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/282/comet_2604-fe0f.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">Animate Loading Bar</h3>
   <p align="center">
-    1kb loading bar like Shopify, Github, JSFiddle... that works!
+    Lightweight TypeScript loading bar like Shopify, Github, JSFiddle... that works!
     <br />
-    <a href="https://hta218.github.io/animate-loading-bar/">View Demo</a>
+    <a href="https://codesandbox.io/p/sandbox/h5945y">
+      <img src="https://img.shields.io/badge/CodeSandbox-Demo-blue?style=flat&logo=codesandbox" alt="CodeSandbox Demo" />
+    </a>
   </p>
 </div>
 
+<div align="center">
+  
+[![Bundle Size](https://bundlejs.com/badge?q=animate-loading@latest)](https://bundlejs.com/?q=animate-loading@latest)
+[![npm version](https://img.shields.io/npm/v/animate-loading.svg?style=flat)](https://www.npmjs.com/package/animate-loading)
+[![npm downloads](https://img.shields.io/npm/dm/animate-loading.svg?style=flat)](https://www.npmjs.com/package/animate-loading)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/npm/l/animate-loading.svg?style=flat)](https://github.com/Weaverse/animate-loading-bar/blob/main/LICENSE)
 
-![Bundle phobia](https://i.imgur.com/zqTcrcV.png)
+</div>
+
+
+## ✨ Features
+
+- 🚀 **Lightweight**: ~3kB gzipped bundle size
+- 📦 **Zero Dependencies**: Pure TypeScript/JavaScript
+- 🎨 **Customizable**: Colors, thickness, timing, overlay options
+- 🔒 **Type Safe**: Full TypeScript support with exported types
+- 🎯 **Modern**: Uses CSS custom properties and modern APIs
+- 🛡️ **Robust**: Built-in state management and error handling
+- 🧹 **Clean**: Memory leak prevention with proper cleanup
 
 ## Installation
 1. Via npm
@@ -27,6 +43,12 @@
 	```js
 	import 'animate-loading/dist/main.css'
 	import AnimateLoading from 'animate-loading'
+	```
+
+	**TypeScript:**
+	```ts
+	import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
+	import 'animate-loading/dist/main.css'
 	```
 3. Usage
 	```js
@@ -43,6 +65,24 @@
 	loading.finish()
 	```
 
+	**TypeScript with full type safety:**
+	```ts
+	import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
+	
+	const options: AnimateLoadingOptions = {
+		thickness: '4px',
+		color: '#3498db',
+		startDuration: 1200,
+		finishDuration: 400
+	}
+	
+	const loading = new AnimateLoading(document.body, options)
+	
+	loading.start()
+	await fetch('YOUR_API')
+	loading.finish(() => console.log('Done!'))
+	```
+
 
 ## Available options
 
@@ -52,21 +92,23 @@ const loading = new AnimateLoading(target, options)
 
 - `target` [HTMLElement]: where the loading bar shows up. (Default value: `document.body`)
 - `options` [Object]: Loading options
-  - `options.overlay` [HTMLElement]: Set a blur overlay to your node (if neccessary)
+  - `options.overlay` [HTMLElement]: Set a blur overlay to your node (if necessary)
   - `options.thickness` [String]: the loading bar thickness (Default value: `3px`)
   - `options.color` [String]: the loading bar background color (Default value: `gray`)
+  - `options.overlayColor` [String]: the overlay background color (Default value: `#ffffff`)
+  - `options.overlayOpacity` [Number]: the overlay opacity when shown (Default value: `0.6`)
   - `options.startDuration` [Number]: The duration (in `ms`) from the start of your async stuff until it gets done (Default value: `1000`)
   - `options.finishDuration` [Number]: The duration (in `ms`) left to finish loading (Default value: `300`)
 
 ## Methods
 
-1. Start loading
+1. **Start loading**
 	```javascript
 	loading.start()
 	```
 	Run this before starting your async stuff
 
-2. Finish loading
+2. **Finish loading**
 	```javascript
 	loading.finish(callback = () => {})
 	```
@@ -74,6 +116,47 @@ const loading = new AnimateLoading(target, options)
 
 	Optional `callback` can be pass to run after finishing the loading process.
 
+3. **Check loading state**
+	```javascript
+	if (loading.loading) {
+		console.log('Loading in progress...')
+	}
+	```
+
+4. **Destroy instance**
+	```javascript
+	loading.destroy()
+	```
+	Call this when you no longer need the instance. Cleans up all timeouts and DOM classes.
+
+## Advanced Usage
+
+```javascript
+const loading = new AnimateLoading(document.body, {
+	thickness: '4px',
+	color: '#3498db',
+	overlayColor: '#000000',
+	overlayOpacity: 0.8,
+	startDuration: 1500,
+	finishDuration: 500
+})
+
+// Safe usage with state checking
+if (!loading.loading) {
+	loading.start()
+	
+	try {
+		await someAsyncOperation()
+		loading.finish(() => console.log('Success!'))
+	} catch (error) {
+		loading.finish(() => console.error('Failed!'))
+	}
+}
+
+// Clean up when done
+loading.destroy()
+```
+
 ## Credit
 
-Copyright (c) 2022 Leo Huynh @ [https://leohuynh.dev](https://leohuynh.dev)
+Copyright (c) 2022-present by Leo Huynh @ [https://leohuynh.dev](https://leohuynh.dev)
