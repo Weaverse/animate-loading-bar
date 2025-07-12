@@ -27,56 +27,56 @@
 
 ## Installation
 1. Via npm
-	```sh
-	npm install animate-loading
-	```
-	Or yarn
-	```sh
-	yarn add animate-loading
-	```
+  ```sh
+  npm install animate-loading
+  ```
+  Or yarn
+  ```sh
+  yarn add animate-loading
+  ```
 2. Import to your project
-	```js
-	import 'animate-loading/dist/main.css'
-	import AnimateLoading from 'animate-loading'
-	```
+  ```js
+  import 'animate-loading/dist/main.css'
+  import AnimateLoading from 'animate-loading'
+  ```
 
-	**TypeScript:**
-	```ts
-	import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
-	import 'animate-loading/dist/main.css'
-	```
+  **TypeScript:**
+  ```ts
+  import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
+  import 'animate-loading/dist/main.css'
+  ```
 3. Usage
-	```js
-	// Create an instance in your project
-	const loading = new AnimateLoading()
+  ```js
+  // Create an instance in your project
+  const loading = new AnimateLoading()
 
-	// Start loading
-	loading.start()
+  // Start loading
+  loading.start()
 
-	// Execute your async stuff
-	await fetch('YOUR_API')
+  // Execute your async stuff
+  await fetch('YOUR_API')
 
-	// Finish loading
-	loading.finish()
-	```
+  // Finish loading
+  loading.finish()
+  ```
 
-	**TypeScript with full type safety:**
-	```ts
-	import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
-	
-	const options: AnimateLoadingOptions = {
-		thickness: '4px',
-		color: '#3498db',
-		startDuration: 1200,
-		finishDuration: 400
-	}
-	
-	const loading = new AnimateLoading(document.body, options)
-	
-	loading.start()
-	await fetch('YOUR_API')
-	loading.finish(() => console.log('Done!'))
-	```
+  **TypeScript with full type safety:**
+  ```ts
+  import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
+  
+  const options: AnimateLoadingOptions = {
+    thickness: '4px',
+    color: '#3498db',
+    startDuration: 1200,
+    finishDuration: 400
+  }
+  
+  const loading = new AnimateLoading(document.body, options)
+  
+  loading.start()
+  await fetch('YOUR_API')
+  loading.finish(() => console.log('Done!'))
+  ```
 
 
 ## Available options
@@ -98,54 +98,54 @@ const loading = new AnimateLoading(target, options)
 ## Methods
 
 1. **Start loading**
-	```javascript
-	loading.start()
-	```
-	Run this before starting your async stuff
+  ```javascript
+  loading.start()
+  ```
+  Run this before starting your async stuff
 
 2. **Finish loading**
-	```javascript
-	loading.finish(callback = () => {})
-	```
-	Run this after your async stuff gets done.
+  ```javascript
+  loading.finish(callback = () => {})
+  ```
+  Run this after your async stuff gets done.
 
-	Optional `callback` can be pass to run after finishing the loading process.
+  Optional `callback` can be pass to run after finishing the loading process.
 
 3. **Check loading state**
-	```javascript
-	if (loading.loading) {
-		console.log('Loading in progress...')
-	}
-	```
+  ```javascript
+  if (loading.loading) {
+    console.log('Loading in progress...')
+  }
+  ```
 
 4. **Destroy instance**
-	```javascript
-	loading.destroy()
-	```
-	Call this when you no longer need the instance. Cleans up all timeouts and DOM classes.
+  ```javascript
+  loading.destroy()
+  ```
+  Call this when you no longer need the instance. Cleans up all timeouts and DOM classes.
 
 ## Advanced Usage
 
 ```javascript
 const loading = new AnimateLoading(document.body, {
-	thickness: '4px',
-	color: '#3498db',
-	overlayColor: '#000000',
-	overlayOpacity: 0.8,
-	startDuration: 1500,
-	finishDuration: 500
+  thickness: '4px',
+  color: '#3498db',
+  overlayColor: '#000000',
+  overlayOpacity: 0.8,
+  startDuration: 1500,
+  finishDuration: 500
 })
 
 // Safe usage with state checking
 if (!loading.loading) {
-	loading.start()
-	
-	try {
-		await someAsyncOperation()
-		loading.finish(() => console.log('Success!'))
-	} catch (error) {
-		loading.finish(() => console.error('Failed!'))
-	}
+  loading.start()
+  
+  try {
+    await someAsyncOperation()
+    loading.finish(() => console.log('Success!'))
+  } catch (error) {
+    loading.finish(() => console.error('Failed!'))
+  }
 }
 
 // Clean up when done
