@@ -22,7 +22,7 @@
 
 .al-loading-bar::before {
   content: "";
-  position: fixed;
+  position: absolute;
   z-index: 999999999;
   top: 0px;
   left: 0px;
