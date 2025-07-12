@@ -44,10 +44,10 @@ export default class AnimateLoading {
 			options: { startDuration, finishDuration, thickness, color }
 		} = this
 
-		target.style.setProperty('--al-thickness', ` ${thickness}`)
-		target.style.setProperty('--al-color', ` ${color}`)
-		target.style.setProperty('--al-start-duration', ` ${startDuration}ms`)
-		target.style.setProperty('--al-finish-duration', ` ${finishDuration}ms`)
+		target.style.setProperty('--al-thickness', thickness)
+		target.style.setProperty('--al-color', color)
+		target.style.setProperty('--al-start-duration', `${startDuration}ms`)
+		target.style.setProperty('--al-finish-duration', `${finishDuration}ms`)
 	}
 
 	/**
@@ -67,7 +67,7 @@ export default class AnimateLoading {
 	finish = (callback: () => void = () => {}): void => {
 		const { target, overlay, cleanUp, options: { finishDuration } } = this
 
-		const endWidth = window.getComputedStyle(target, ':before').width
+		const endWidth = window.getComputedStyle(target, '::before').width
 		target.style.setProperty('--al-end-width', endWidth)
 
 		target.classList.add('loaded')

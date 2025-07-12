@@ -6,7 +6,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'animate-loading',
-      fileName: (format) => `main.js`,
+      fileName: () => `main.js`,
       formats: ['umd']
     },
     outDir: 'dist',
