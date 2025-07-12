@@ -1,24 +1,17 @@
 {
-  "devDependencies": {
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1",
-    "babel-loader": "^8.2.3",
-    "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.7",
-    "css-loader": "^6.5.1",
-    "sass-loader": "^12.4.0",
-    "node-sass": "^7.0.1",
-    "style-loader": "^3.3.1",
-    "mini-css-extract-plugin": "^2.4.5"
-  },
   "name": "animate-loading",
+  "type": "module",
   "version": "1.0.3",
   "description": "1kb loading bar like Shopify, Github, JSFiddle... that works",
   "main": "dist/main.js",
   "scripts": {
-    "clean": "rm dist/bundle.js",
-    "dev": "webpack --mode development --watch --color",
-    "build": "webpack --mode production"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.0.4",
+    "sass": "^1.69.0"
   },
   "repository": {
     "type": "git",
