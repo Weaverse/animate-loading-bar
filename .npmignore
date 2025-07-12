@@ -1,2 +1,4 @@
 vite.config.js
 index.html
+tsconfig.json
+src/

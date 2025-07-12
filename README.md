@@ -3,7 +3,7 @@
   <p align="center">
     1kb loading bar like Shopify, Github, JSFiddle... that works!
     <br />
-    <a href="https://hta218.github.io/animate-loading-bar/">View Demo</a>
+    <a href="https://codesandbox.io/p/sandbox/h5945y">View Demo</a>
   </p>
 </div>
 
