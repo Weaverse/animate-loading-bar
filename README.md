@@ -9,7 +9,6 @@
   
 
 [![CodeSandbox Demo](https://img.shields.io/badge/CodeSandbox-Demo-blue?style=flat&logo=codesandbox)](https://codesandbox.io/p/sandbox/h5945y)
-[![bundle size](https://deno.bundlejs.com/badge?q=@weaverse/animate-loading@latest)](https://deno.bundlejs.com/badge?q=@weaverse/animate-loading@latest)
 [![npm version](https://img.shields.io/npm/v/@weaverse/animate-loading.svg?style=flat)](https://www.npmjs.com/package/@weaverse/animate-loading)
 [![npm downloads](https://img.shields.io/npm/dm/@weaverse/animate-loading.svg?style=flat)](https://www.npmjs.com/package/@weaverse/animate-loading)
 
