@@ -40,15 +40,13 @@
     "loading-bar",
     "progress-bar",
     "loading-indicator",
-    "vanilla-js",
     "typescript",
     "css",
     "animation",
     "ui",
-    "frontend",
-    "web-components"
+    "frontend"
   ],
-  "author": "Leo @ https://leohuynh.dev",
+  "author": "Weaverse",
   "license": "ISC",
   "engines": {
     "node": ">=16.0.0"

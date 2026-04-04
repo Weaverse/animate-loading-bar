@@ -1,5 +1,5 @@
 <div align="center">
-<h3 align="center">Animate Loading Bar</h3>
+<h3 align="center">@weaverse/animate-loading</h3>
   <p align="center">
     Lightweight TypeScript loading bar like Shopify, Github, JSFiddle... that works!
   </p>
@@ -9,9 +9,9 @@
   
 
 [![CodeSandbox Demo](https://img.shields.io/badge/CodeSandbox-Demo-blue?style=flat&logo=codesandbox)](https://codesandbox.io/p/sandbox/h5945y)
-[![bundle size](https://deno.bundlejs.com/badge?q=animate-loading@latest)](https://deno.bundlejs.com/badge?q=animate-loading@latest)
-[![npm version](https://img.shields.io/npm/v/animate-loading.svg?style=flat)](https://www.npmjs.com/package/animate-loading)
-[![npm downloads](https://img.shields.io/npm/dm/animate-loading.svg?style=flat)](https://www.npmjs.com/package/animate-loading)
+[![bundle size](https://deno.bundlejs.com/badge?q=@weaverse/animate-loading@latest)](https://deno.bundlejs.com/badge?q=@weaverse/animate-loading@latest)
+[![npm version](https://img.shields.io/npm/v/@weaverse/animate-loading.svg?style=flat)](https://www.npmjs.com/package/@weaverse/animate-loading)
+[![npm downloads](https://img.shields.io/npm/dm/@weaverse/animate-loading.svg?style=flat)](https://www.npmjs.com/package/@weaverse/animate-loading)
 
 </div>
 
@@ -19,69 +19,61 @@
 ## ✨ Features
 
 - 🚀 **Lightweight**: ~3kB gzipped bundle size
-- 📦 **Zero Dependencies**: Pure TypeScript/JavaScript
+- 📦 **Zero Dependencies**: Pure TypeScript
 - 🎨 **Customizable**: Colors, thickness, timing, overlay options
 - 🔒 **Type Safe**: Full TypeScript support with exported types
 - 🎯 **Modern**: Uses CSS custom properties and modern APIs
 
 
 ## Installation
-1. Via npm
-  ```sh
-  npm install animate-loading
-  ```
-  Or yarn
-  ```sh
-  yarn add animate-loading
-  ```
-2. Import to your project
-  ```js
-  import 'animate-loading/dist/main.css'
-  import AnimateLoading from 'animate-loading'
-  ```
 
-  **TypeScript:**
-  ```ts
-  import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
-  import 'animate-loading/dist/main.css'
-  ```
-3. Usage
-  ```js
-  // Create an instance in your project
-  const loading = new AnimateLoading()
+```sh
+npm install @weaverse/animate-loading
+```
 
-  // Start loading
-  loading.start()
+## Usage
 
-  // Execute your async stuff
-  await fetch('YOUR_API')
+```ts
+import AnimateLoading from '@weaverse/animate-loading'
+import '@weaverse/animate-loading/style.css'
 
-  // Finish loading
-  loading.finish()
-  ```
+// Create an instance
+const loading = new AnimateLoading()
 
-  **TypeScript with full type safety:**
-  ```ts
-  import AnimateLoading, { AnimateLoadingOptions } from 'animate-loading'
-  
-  const options: AnimateLoadingOptions = {
-    thickness: '4px',
-    color: '#3498db',
-    startDuration: 1200,
-    finishDuration: 400
-  }
-  
-  const loading = new AnimateLoading(document.body, options)
-  
-  loading.start()
-  await fetch('YOUR_API')
-  loading.finish(() => console.log('Done!'))
-  ```
+// Start loading
+loading.start()
+
+// Execute your async stuff
+await fetch('YOUR_API')
+
+// Finish loading
+loading.finish()
+```
+
+### With options
+
+```ts
+import AnimateLoading, { type AnimateLoadingOptions } from '@weaverse/animate-loading'
+import '@weaverse/animate-loading/style.css'
+
+const options: AnimateLoadingOptions = {
+  thickness: '4px',
+  color: '#3498db',
+  startDuration: 1200,
+  finishDuration: 400
+}
+
+const loading = new AnimateLoading(document.body, options)
+
+loading.start()
+await fetch('YOUR_API')
+loading.finish(() => console.log('Done!'))
+```
 
 
 ## Available options
 
-```javascript
+```ts
 const loading = new AnimateLoading(target, options)
 ```
 
@@ -98,13 +90,13 @@ const loading = new AnimateLoading(target, options)
 ## Methods
 
 1. **Start loading**
-  ```javascript
+  ```ts
   loading.start()
   ```
   Run this before starting your async stuff
 
 2. **Finish loading**
-  ```javascript
+  ```ts
   loading.finish(callback = () => {})
   ```
   Run this after your async stuff gets done.
@@ -112,21 +104,21 @@ const loading = new AnimateLoading(target, options)
   Optional `callback` can be pass to run after finishing the loading process.
 
 3. **Check loading state**
-  ```javascript
+  ```ts
   if (loading.loading) {
     console.log('Loading in progress...')
   }
   ```
 
 4. **Destroy instance**
-  ```javascript
+  ```ts
   loading.destroy()
   ```
   Call this when you no longer need the instance. Cleans up all timeouts and DOM classes.
 
 ## Advanced Usage
 
-```javascript
+```ts
 const loading = new AnimateLoading(document.body, {
   thickness: '4px',
   color: '#3498db',
@@ -154,4 +146,4 @@ loading.destroy()
 
 ## Credit
 
-Copyright (c) 2022-present by Leo Huynh @ [https://leohuynh.dev](https://leohuynh.dev)
+Copyright (c) 2022-present by [Weaverse](https://weaverse.io)
